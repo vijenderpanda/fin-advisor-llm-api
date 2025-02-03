@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "fin-advisor-llm-api"
+version = "0.1.0"
+description = ""
+authors = ["vijenderpanda <64571936+vijenderpanda@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.115.7"}
+langchain = "^0.3.15"
+uvicorn = "^0.34.0"
+langchain-core = "^0.3.31"
+langchain-openai = "^0.3.1"
+langchain-community = "^0.3.15"
+psycopg = "^3.2.4"
+pgvector = "^0.3.6"
+psycopg2 = "^2.9.10"
+asyncpg = "^0.30.0"
+greenlet = "^3.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

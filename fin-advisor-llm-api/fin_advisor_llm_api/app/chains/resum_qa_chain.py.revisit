@@ -1,0 +1,65 @@
+from dotenv import load_dotenv
+
+from langchain_community.vectorstores.pgvector import PGVector
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_core.runnables import RunnableParallel
+from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_community.chat_message_histories import SQLChatMessageHistory
+from langchain.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.messages import get_buffer_string
+from operator import itemgetter
+
+
+from resume_rag_api.app.prompts import prompt as system_prompts
+
+load_dotenv()
+
+vector_store = PGVector(
+    collection_name="vijender_intro",
+    connection_string="postgresql://neondb_owner:npg_I4RYFuxEd8tv@ep-restless-forest-a5h95qgf-pooler.us-east-2.aws.neon.tech/neondb",
+    embedding_function=OpenAIEmbeddings()
+)
+
+postgres_memory_url = "postgresql://neondb_owner:npg_y8IjUwmbv0sW@ep-flat-glade-a4m83cg4-pooler.us-east-1.aws.neon.tech/neondb"
+get_session_history = lambda session_id: SQLChatMessageHistory(
+    connection_string=postgres_memory_url,
+    session_id=session_id
+)
+
+llm = ChatOpenAI(temperature=0)
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", system_prompts.resume_qa_system_prompt),
+    MessagesPlaceholder(variable_name="history"),
+    ("human", "{question}")
+])
+
+
+
+retreiver = vector_store.as_retriever()
+
+
+qa_chain = (
+    {
+        "context": itemgetter("question") | retreiver,
+        "question": itemgetter("question"),
+        "history": itemgetter("history")
+    }
+    | prompt
+    | llm
+    | StrOutputParser()
+)
+
+qa_chain_with_history = RunnableWithMessageHistory(
+    qa_chain,
+    lambda session_id: SQLChatMessageHistory(
+        connection_string=postgres_memory_url,
+        session_id=session_id
+    ),
+    input_messages_key="question",
+    history_messages_key="history",
+)
