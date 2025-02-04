@@ -3,14 +3,22 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import asyncio
 import logging
+from typing import Optional, List, Dict
+import datetime
+import json
 
 from fin_advisor_llm_api.app.chains.fin_advisor_chain import generate_chain_with_history, reflective_stream_chain, tool_agent_chain
 from fin_advisor_llm_api.app.chains.planning_agent import PlanningAgent
+from fin_advisor_llm_api.app.chains.multi_agent import FinancialMultiAgent
 
 router = APIRouter(prefix='/api/v1', tags=["v1"])
 
 # Create a Pydantic model for the request body
 class QuestionRequest(BaseModel):
+    question: str
+    sessionId: str
+
+class MultiAgentRequest(BaseModel):
     question: str
     sessionId: str
 
@@ -159,4 +167,25 @@ async def execute_planning_agent(request: QuestionRequest):
             status_code=500,
             detail=str(e)
         )
+    
+@router.post("/multi-agent/analyze")
+async def multi_agent_analysis(request: MultiAgentRequest):
+    try:
+        config = {"configurable": {"session_id": request.sessionId}}
+        
+        # Initialize multi-agent system
+        multi_agent = FinancialMultiAgent()
+        
+        # Execute analysis with just the question and session ID
+        response = await multi_agent.run_analysis(
+            user_input=request.question,
+            session_id=request.sessionId,
+            config=config
+        )
+        
+        return response
+        
+    except Exception as e:
+        logging.error(f"Error in multi_agent_analysis: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
     
