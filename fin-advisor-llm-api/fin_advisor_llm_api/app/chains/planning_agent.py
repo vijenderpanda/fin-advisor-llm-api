@@ -8,6 +8,8 @@ from typing import List, Dict, Any
 import json
 import logging
 from sqlalchemy import create_engine
+from contextlib import contextmanager
+from sqlalchemy.pool import QueuePool
 
 # Import existing tools
 from fin_advisor_llm_api.app.tools.tool import (
@@ -31,8 +33,23 @@ logging.basicConfig(
 )
 # Database configuration
 postgres_url = "postgresql+psycopg://neondb_owner:npg_y8IjUwmbv0sW@ep-flat-glade-a4m83cg4-pooler.us-east-1.aws.neon.tech/neondb"
-engine = create_engine(postgres_url)
+engine = create_engine(
+    postgres_url,
+    poolclass=QueuePool,
+    pool_size=20,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_recycle=1800  # Recycle connections after 30 minutes
+)
 
+@contextmanager
+def get_db_connection():
+    """Context manager for database connections"""
+    try:
+        connection = engine.connect()
+        yield connection
+    finally:
+        connection.close()
 
 class PlanningAgent:
     def __init__(self):

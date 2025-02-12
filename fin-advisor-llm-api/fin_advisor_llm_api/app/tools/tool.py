@@ -3,14 +3,19 @@ import requests
 import random
 import json
 from datetime import datetime
+from functools import lru_cache
+import gc
 
+
+# Add caching to prevent repeated API calls
+@lru_cache(maxsize=100)
+def cached_api_call(url, params):
+    response = requests.get(url, params=params)
+    return response.json()
 
 @tool
 def stock_price_fetcher(query: str) -> str:
-    """Fetch real-time stock prices.
-    Query format: 'symbol: STOCK_SYMBOL'
-    For Indian stocks, add .NS for NSE listings (e.g., TCS.NS)
-    """
+    """Fetch real-time stock prices with improved memory management."""
     try:
         symbol = query.split(':')[1].strip()
         
@@ -20,9 +25,18 @@ def stock_price_fetcher(query: str) -> str:
         
         # Using Alpha Vantage API (requires free API key)
         API_KEY = "5JU1BLZLJCL0WLJ8"
-        url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={API_KEY}"
-        response = requests.get(url)
-        data = response.json()
+        url = f"https://www.alphavantage.co/query"
+        params = {
+            "function": "GLOBAL_QUOTE",
+            "symbol": symbol,
+            "apikey": API_KEY
+        }
+        
+        # Use cached API call
+        data = cached_api_call(url, frozenset(params.items()))
+        
+        # Clear any unused objects
+        gc.collect()
         
         if "Global Quote" in data and data["Global Quote"]:
             quote = data["Global Quote"]
@@ -37,6 +51,7 @@ def stock_price_fetcher(query: str) -> str:
             Note: Prices are delayed by 15 minutes."""
         return f"Unable to fetch price for {symbol}. Please check the symbol and try again."
     except Exception as e:
+        logger.error(f"Error in stock_price_fetcher: {str(e)}")
         return f"Error fetching stock price: {str(e)}"
 
 @tool

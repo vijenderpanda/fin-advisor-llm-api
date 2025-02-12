@@ -1,0 +1,140 @@
+[2025-02-12 19:00:26 +0530] [89083] [INFO] Starting gunicorn 23.0.0
+[2025-02-12 19:00:26 +0530] [89083] [INFO] Listening at: http://0.0.0.0:8002 (89083)
+[2025-02-12 19:00:26 +0530] [89083] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-02-12 19:00:26 +0530] [89102] [INFO] Booting worker with pid: 89102
+[2025-02-12 19:00:26 +0530] [89102] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fin_advisor_llm_api.main'
+[2025-02-12 19:00:26 +0530] [89102] [INFO] Worker exiting (pid: 89102)
+[2025-02-12 19:00:26 +0530] [89083] [ERROR] Worker (pid:89102) exited with code 3
+[2025-02-12 19:00:26 +0530] [89083] [ERROR] Shutting down: Master
+[2025-02-12 19:00:26 +0530] [89083] [ERROR] Reason: Worker failed to boot.
+[2025-02-12 19:06:06 +0530] [94864] [INFO] Starting gunicorn 23.0.0
+[2025-02-12 19:06:06 +0530] [94864] [INFO] Listening at: http://0.0.0.0:8002 (94864)
+[2025-02-12 19:06:06 +0530] [94864] [INFO] Using worker: uvicorn.workers.UvicornWorker
+[2025-02-12 19:06:06 +0530] [94865] [INFO] Booting worker with pid: 94865
+[2025-02-12 19:06:06 +0530] [94866] [INFO] Booting worker with pid: 94866
+[2025-02-12 19:06:06 +0530] [94866] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fin_advisor_llm_api.main'
+[2025-02-12 19:06:06 +0530] [94865] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fin_advisor_llm_api.main'
+[2025-02-12 19:06:06 +0530] [94866] [INFO] Worker exiting (pid: 94866)
+[2025-02-12 19:06:06 +0530] [94865] [INFO] Worker exiting (pid: 94865)
+[2025-02-12 19:06:06 +0530] [94867] [INFO] Booting worker with pid: 94867
+[2025-02-12 19:06:06 +0530] [94864] [ERROR] Worker (pid:94866) exited with code 3
+[2025-02-12 19:06:06 +0530] [94867] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+    worker.init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/uvicorn/workers.py", line 75, in init_process
+    super().init_process()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 135, in init_process
+    self.load_wsgi()
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+    self.wsgi = self.app.wsgi()
+                ^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+                    ^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+    return self.load_wsgiapp()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+    return util.import_app(self.app_uri)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/site-packages/gunicorn/util.py", line 370, in import_app
+    mod = importlib.import_module(module)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vijenderpanda/miniconda3/envs/llm_app/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'fin_advisor_llm_api.main'
+[2025-02-12 19:06:06 +0530] [94867] [INFO] Worker exiting (pid: 94867)
+[2025-02-12 19:06:06 +0530] [94864] [ERROR] Worker (pid:94867) was sent SIGTERM!
+[2025-02-12 19:06:06 +0530] [94864] [ERROR] Worker (pid:94865) exited with code 3
